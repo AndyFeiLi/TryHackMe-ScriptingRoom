@@ -84,13 +84,13 @@ while nextPort != "9765":
         
 
         if operation == "add":
-            answer = answer + int(amount)
+            answer = answer + float(amount)
         elif operation == "minus":
-            answer = answer - int(amount)
+            answer = answer - float(amount)
         elif operation == "multiply":
-            answer = answer * int(amount)
+            answer = answer * float(amount)
         elif operation == "divide":
-            answer = answer/int(amount)
+            answer = answer/float(amount)
 
         print("current answer is : " + str(answer))
 
