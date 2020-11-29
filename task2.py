@@ -9,34 +9,39 @@ nextPort = 3010
 
 page = ""
 
-s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+while nextPort != "1337":
 
-s.connect(("10.10.38.175" , 3010))
-s.sendall(b"GET / HTTP/1.1\r\nHost: webcode.me\r\nAccept: text/html\r\nConnection: close\r\n\r\n")
+    s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-while True:
+    s.connect(("10.10.38.175" , 3010))
+    s.sendall(b"GET / HTTP/1.1\r\nHost: webcode.me\r\nAccept: text/html\r\nConnection: close\r\n\r\n")
 
-    data = s.recv(1024)
+    while True:
 
-    if not data:
-        break
+        data = s.recv(1024)
 
-    page = page + data.decode()
+        if not data:
+            break
+
+        page = page + data.decode()
 
 
 
-#print(page)
+    #print(page)
 
-start = page.index("Its currenly on port") + 55
-end = page.index("Refresh this page and it will update") - 10
+    start = page.index("Its currenly on port") + 55
+    end = page.index("Refresh this page and it will update") - 10
 
-nextPort = page[start:end]
+    nextPort = page[start:end]
 
-page = ""
+    page = ""
+
+    print("waiting for port 1337 to open, current port: "+ nextPort)
+    time.sleep(3)
 
 #get next port
 
-while True:
+while nextPort != "9765":
 
     try:
 
@@ -56,10 +61,6 @@ while True:
                 break
 
             page = page + data.decode()
-
-        if page == "TOP":
-            break
-
 
         message = page[154:]
 
