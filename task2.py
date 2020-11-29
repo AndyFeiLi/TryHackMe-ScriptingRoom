@@ -10,6 +10,7 @@ nextPort = 3010
 page = ""
 
 while nextPort != "1337":
+    
 
     s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -41,6 +42,8 @@ while nextPort != "1337":
 
 #get next port
 
+answer = 0
+
 while nextPort != "9765":
 
     try:
@@ -69,5 +72,18 @@ while nextPort != "9765":
         nextPort = message.split()[2]
         page = ""
         time.sleep(1)
+
+        if operation == "add":
+            answer = answer + int(amount)
+        elif operation == "minus":
+            answer = answer - int(amount)
+        elif operation == "multiply":
+            answer = answer * int(amount)
+        elif operation == "divide":
+            answer = answer/int(amount)
+
+        print("current value: "+ answer)
     except:
         time.sleep(0.1)
+
+print("answer is: "+ answer)
